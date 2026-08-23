@@ -24,16 +24,18 @@ The image is flattened into:
 
 **28 × 28 = 784 input features**
 
+![MNIST Sample](results/01_mnist_sample.png)
+
 ---
 
 ## Dataset — MNIST
 
 MNIST contains:
 
-* 60,000 training images
-* 10,000 test images
-* Image size: 28×28 pixels
-* 10 digit classes
+- 60,000 training images
+- 10,000 test images
+- Image size: 28×28 pixels
+- 10 digit classes
 
 Each image is converted into a vector of 784 input values before being passed to the neural network.
 
@@ -43,20 +45,20 @@ Each image is converted into a vector of 784 input values before being passed to
 
 The implemented network has the following architecture:
 
-```text
-784 → 128 → 10
-```
+**784 → 128 → 10**
 
 ### Layers
 
-* **Input:** 784 features
-* **Hidden Layer:** 128 neurons
-* **Activation:** ReLU
-* **Output:** 10 neurons
+- **Input:** 784 features
+- **Hidden Layer:** 128 neurons
+- **Activation:** ReLU
+- **Output:** 10 neurons
 
 Each output neuron corresponds to one digit class.
 
 The network is fully connected between consecutive layers.
+
+![MLP Architecture](results/02_mlp_architecture.png)
 
 ---
 
@@ -66,9 +68,7 @@ The network is fully connected between consecutive layers.
 
 Each neuron calculates a weighted sum of its inputs and adds a bias:
 
-```text
-z = Σ(xᵢwᵢ) + b
-```
+`z = Σ(xᵢwᵢ) + b`
 
 The weights and biases are learned during training.
 
@@ -76,25 +76,13 @@ The weights and biases are learned during training.
 
 During a forward pass, the input propagates through the network:
 
-```text
-Input
-  ↓
-Linear Layer
-  ↓
-ReLU
-  ↓
-Linear Layer
-  ↓
-10 Output Scores
-```
+**Input → Linear Layer → ReLU → Linear Layer → 10 Output Scores**
 
 ### 3. ReLU
 
 The hidden layer uses the ReLU activation function:
 
-```text
-ReLU(x) = max(0, x)
-```
+`ReLU(x) = max(0, x)`
 
 ReLU introduces non-linearity, allowing the network to learn more complex relationships in the data.
 
@@ -106,17 +94,7 @@ The model uses **Cross Entropy Loss** to measure the difference between its pred
 
 The training process follows:
 
-```text
-Forward Pass
-     ↓
-Loss Calculation
-     ↓
-Backpropagation
-     ↓
-Gradient Calculation
-     ↓
-Optimizer Update
-```
+**Forward Pass → Loss Calculation → Backpropagation → Gradient Calculation → Optimizer Update**
 
 Backpropagation calculates the gradients of the loss with respect to the model parameters.
 
@@ -128,13 +106,17 @@ The optimizer then uses these gradients to update the weights and biases.
 
 The implemented training process uses:
 
-* Batch Size: **64**
-* Epochs: **10**
-* Optimizer: **SGD**
-* Learning Rate: **0.01**
-* Loss Function: **Cross Entropy**
+- Batch Size: **64**
+- Epochs: **10**
+- Optimizer: **SGD**
+- Learning Rate: **0.01**
+- Loss Function: **Cross Entropy**
 
 Training is performed batch by batch, with the model parameters updated after each batch.
+
+### Training Loss
+
+![Training Loss](results/03_training_loss.png)
 
 ---
 
@@ -145,6 +127,8 @@ After training, the model is evaluated on the MNIST test set.
 The model achieved approximately:
 
 **93% Test Accuracy**
+
+![Test Accuracy](results/06_test_accuracy_93_03.png)
 
 The test set is used to evaluate how well the trained model generalizes to examples that were not used during training.
 
@@ -166,21 +150,7 @@ To test the model beyond the original MNIST test set, an interactive digit-drawi
 
 The process is:
 
-```text
-Canvas
-  ↓
-Image Preprocessing
-  ↓
-28×28 Image
-  ↓
-Normalization
-  ↓
-Flattening
-  ↓
-MLP
-  ↓
-Prediction
-```
+**Canvas → Image Preprocessing → 28×28 Image → Normalization → Flattening → MLP → Prediction**
 
 The preprocessing step includes adapting the user-drawn image to the format expected by the trained model.
 
@@ -192,11 +162,13 @@ Testing with personally drawn digits revealed an important limitation.
 
 Although the model achieved approximately 93% accuracy on MNIST, it showed difficulties with certain handwritten examples, particularly **7 and 9**.
 
+![Error Analysis](results/05_most_common_error_9_to_4.png)
+
 Several approaches were explored:
 
-* Fine-Tuning
-* Data Augmentation
-* Preprocessing
+- Fine-Tuning
+- Data Augmentation
+- Preprocessing
 
 The goal was to determine whether the model could better handle handwriting that differed from the MNIST distribution.
 
@@ -216,17 +188,17 @@ This demonstrated the importance of evaluating not only accuracy, but also how w
 
 Through this project I developed a practical understanding of:
 
-* Neural network architecture
-* Neurons, weights and biases
-* Forward propagation
-* Activation functions
-* Loss functions
-* Backpropagation
-* Gradients
-* Gradient descent and optimization
-* Batch-based training
-* Model evaluation
-* Generalization and error analysis
+- Neural network architecture
+- Neurons, weights and biases
+- Forward propagation
+- Activation functions
+- Loss functions
+- Backpropagation
+- Gradients
+- Gradient descent and optimization
+- Batch-based training
+- Model evaluation
+- Generalization and error analysis
 
 The project connected the mathematical theory of neural networks with an implemented working model.
 
